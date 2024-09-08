@@ -19,6 +19,9 @@
 // Import variables
 @use './sass/variables/colors' as *;  // here we use * to don't use name spaces in each variable we want to call like colors.$main
 
+// Import Mixins
+@use './sass/helpers/mixins' as *;
+
 // Global Variable
 $alt_color: green;
 
@@ -292,3 +295,33 @@ $position: "right";
 /// @param {num}
 /// the number to deal with
 /// @return {int}
+
+
+
+// Mixin and Include Important the _mixins.scss file write the mixin example inside it and import it to use it below
+
+ul.links {
+    @include list-reset;
+}
+
+
+
+.circle-100 {
+    @include circle(100px);
+    background-color:red;
+    color: white;
+}
+
+.circle-200 {
+    @include circle(200px);
+    background-color: red;
+    color: white;
+}
+
+
+
+.center-circle {
+    @include circle(400px);
+    @include centering;
+
+}

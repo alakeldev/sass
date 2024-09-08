@@ -170,16 +170,46 @@
   border-right-color: red;
 }
 
-.ad-alakel-umtmmrn {
+.ad-alakel-umtmn3f {
   font-size: 20px;
   background-image: url("imgs/alakel.png");
   right: 0;
 }
 
-.ad-umtmmse {
+.ad-umtmn42 {
   font-weight: bold;
 }
 
 /* this comment will show in css file but not in compessed mode Multiple lines comment */
 /*! this comment will show in css file and in compessed mode */
-/* this comment contains Interpolation  => alakel*//*# sourceMappingURL=main.css.map */
+/* this comment contains Interpolation  => alakel*/
+ul.links {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.circle-100 {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  color: white;
+}
+
+.circle-200 {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  color: white;
+}
+
+.center-circle {
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=main.css.map */
