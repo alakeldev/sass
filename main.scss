@@ -1,0 +1,294 @@
+// @for $i from 1 through 50 {
+//     .class-#{$i} {
+//         font-size: 10px + $i;
+//     }
+// }
+
+// .class {
+//     transform: translateX(10px);
+// }
+
+// -----------------------------------
+
+// Import Global Rules
+@use './sass/layout/global-rules';
+
+// Import Pages
+@use './sass/pages/contact.scss';
+
+// Import variables
+@use './sass/variables/colors' as *;  // here we use * to don't use name spaces in each variable we want to call like colors.$main
+
+// Global Variable
+$alt_color: green;
+
+.header {
+    color: $alt_color;   //green => Here it will take the value from the global variable before it change its value inside the footer because of !global
+}
+
+.footer {
+    // Local Variable
+    $alt_color: black !global; // global flag
+    background-color: $alt_color; // black its value changed to black
+}
+
+.copyright {
+    background-color: $alt_color;  // bkacl its value changed to black because of the !global inside the footer
+}
+
+.sidebar {
+    background-color: $main;
+    color: $alt;
+}
+
+$max_mobile: "max-width: 575px";
+
+@media ($max_mobile) {
+    .sidebar {
+        padding: 20px;
+    }
+}
+
+
+// Nesting & Parent Element
+
+.parent {
+    font-weight: bold;
+    .child {
+        font-size: 20px;
+        .grand-child {
+            font-size: 15px;
+        }
+    }
+}
+
+.parent-one , .parent-two {
+    padding: 20px;
+    .child {
+        padding: 10px;
+    }
+}
+
+// direct child of the parent both elements below are direct child of this parent
+.parent > {
+    .child {
+        font-size: 20px;
+    }
+    .test {
+        font-weight: bold;
+    }
+}
+
+// below if you want to target only one element from the both you follow the way below
+
+.parent {
+    > .child {
+        font-size: 20px;
+    }
+
+    .test {
+        font-weight: bold;
+    }
+    + p {   // here + p the next element
+        font-size: 15px;
+    }
+}
+
+
+.parent {
+    > {
+        .element-one {
+            font-size: 10px;
+        }
+        .element-two {
+            font-size: 20px;
+        }
+    }
+}
+
+
+.box {
+    .title {
+        font-size: 40px;
+    }
+    .description {
+        font-size: 10px;
+    }
+    &.red {
+        color: red;
+    }
+    &.green {
+        color: green;
+    }
+    &:hover {
+        background-color: #eee;
+    }
+    &:hover .title {
+        font-weight: bold;
+    }
+    :not(&) {
+        font-weight: normal;
+    }
+    [dir=rtl] & {
+        direction: rtl;
+    }
+}
+
+
+// Property Declarations and placeholder
+
+.box {
+    font-size: 20px;
+    font: {
+        size: 15px;
+        weight: bold;
+    }
+    padding: 10px;
+    margin: auto {
+        top: 10px;
+        bottom: 20px;
+    }
+}
+
+// here to use and extend this class within another classes and use it inside another classes without using place holder
+.main-box {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+
+.ads {
+    @extend .main-box;
+    font-size: 20px;
+    color: red;
+}
+
+.article {
+    @extend .main-box;
+    font-size: 22px;
+    color: green;
+}
+
+
+// example below to use the placeholder without being a class inside another classes check below
+
+%main-box {  // here it's a placeholder if you check the main.css file it will be not found as a class its only placeholder to use its properties only inside another classes
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+
+.ads {
+    @extend %main-box;
+    font-size: 20px;
+    color: red;
+}
+
+.article {
+    @extend %main-box;
+    font-size: 22px;
+    color: green;
+}
+
+
+// control flow => if and else 
+// if you want to make the website dark / light or arabic / english you want to use control flow to control over these different conditions
+
+
+$light: 'dark';
+
+.page {
+    @if $light == 'light' {
+        background-color: white;
+        color: #444;
+    } @else {
+        background-color: #444;
+        color: white;
+    }
+}
+
+$rounded: true;
+
+.box {
+    @extend %main-box;
+    border-radius: if($rounded, 6px, null);  // if rounded == true please apply the 6px on border-radius if not true it will not apply (apply null)
+}
+
+// Create Triangle with ie else if   Practice Important to understand
+
+$direction: 'left';
+
+.arrow-div {
+    @extend %main-box;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 50px auto;
+    &::before {
+        content: '';
+        position: absolute;
+        border: 20px solid transparent;
+        @if $direction == 'top' {
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-color: red;
+        } @else if $direction == 'right' {
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left-color: red;
+        } @else if $direction =='bottom' {
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top-color: red;
+        } @else if $direction =='left' {
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-right-color: red;
+        } @else {
+            @error "This Direction #{$direction} Is Not Valid";
+        }
+    }
+}
+
+
+// Interpolation #{variableName}
+
+$company: "alakel";
+$position: "right";
+
+.ad-#{$company}-#{unique-id()} {    //unique-id() it's builtin function generate a unique id characters
+    font-size: 20px;
+    background-image: url("imgs/#{$company}.png");
+    #{$position}: 0;
+}
+
+
+.ad-#{unique-id()} {
+    font-weight: bold;
+}
+
+
+// comments and Documenting
+
+// this comment will not show in css file
+
+/* this comment will show in css file but not in compessed mode Multiple lines comment */
+
+/*! this comment will show in css file and in compessed mode */
+
+/* this comment contains Interpolation  => #{$company}*/
+
+
+/// Documention like function to do bla bla bla
+/// 
+/// @param {num}
+/// the number to deal with
+/// @return {int}

@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --main-color: blue;
+}
+
+.contact {
+  padding: 20px;
+  background-color: var(--main-color);
+}
+
+.header {
+  color: green;
+}
+
+.footer {
+  background-color: black;
+}
+
+.copyright {
+  background-color: black;
+}
+
+.sidebar {
+  background-color: orange;
+  color: violet;
+}
+
+@media (max-width: 575px) {
+  .sidebar {
+    padding: 20px;
+  }
+}
+.parent {
+  font-weight: bold;
+}
+.parent .child {
+  font-size: 20px;
+}
+.parent .child .grand-child {
+  font-size: 15px;
+}
+
+.parent-one, .parent-two {
+  padding: 20px;
+}
+.parent-one .child, .parent-two .child {
+  padding: 10px;
+}
+
+.parent > .child {
+  font-size: 20px;
+}
+.parent > .test {
+  font-weight: bold;
+}
+
+.parent > .child {
+  font-size: 20px;
+}
+.parent .test {
+  font-weight: bold;
+}
+.parent + p {
+  font-size: 15px;
+}
+
+.parent > .element-one {
+  font-size: 10px;
+}
+.parent > .element-two {
+  font-size: 20px;
+}
+
+.box .title {
+  font-size: 40px;
+}
+.box .description {
+  font-size: 10px;
+}
+.box.red {
+  color: red;
+}
+.box.green {
+  color: green;
+}
+.box:hover {
+  background-color: #eee;
+}
+.box:hover .title {
+  font-weight: bold;
+}
+:not(.box) {
+  font-weight: normal;
+}
+[dir=rtl] .box {
+  direction: rtl;
+}
+
+.box {
+  font-size: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.main-box, .article, .ads {
+  background-color: white;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+
+.ads {
+  font-size: 20px;
+  color: red;
+}
+
+.article {
+  font-size: 22px;
+  color: green;
+}
+
+.arrow-div, .box, .article, .ads {
+  background-color: white;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+
+.ads {
+  font-size: 20px;
+  color: red;
+}
+
+.article {
+  font-size: 22px;
+  color: green;
+}
+
+.page {
+  background-color: #444;
+  color: white;
+}
+
+.box {
+  border-radius: 6px;
+}
+
+.arrow-div {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  margin: 50px auto;
+}
+.arrow-div::before {
+  content: "";
+  position: absolute;
+  border: 20px solid transparent;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: red;
+}
+
+.ad-alakel-umtmmrn {
+  font-size: 20px;
+  background-image: url("imgs/alakel.png");
+  right: 0;
+}
+
+.ad-umtmmse {
+  font-weight: bold;
+}
+
+/* this comment will show in css file but not in compessed mode Multiple lines comment */
+/*! this comment will show in css file and in compessed mode */
+/* this comment contains Interpolation  => alakel*//*# sourceMappingURL=main.css.map */
