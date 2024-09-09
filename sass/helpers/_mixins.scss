@@ -16,3 +16,42 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin overlay($color, $opacity) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color, $opacity);
+}
+
+// Important with using content Important to understand and focus on
+@mixin keyF($anim-name) {
+    @keyframes #{$anim-name} {
+        @content;
+    }
+}
+
+
+// mixin media queries
+
+@mixin breakpoints($point) {
+    @if $point == mobile {
+        @media (max-width: 767px) {
+            @content;
+        }
+    } @else if $point == small {
+        @media (min-width: 767px) and (max-width: 991px) {
+            @content;
+        }
+    } @else if $point == medium {
+        @media (min-width: 992px) and (max-width: 1199px) {
+            @content;
+        }
+    } @else if $point == large {
+        @media (min-width: 992px) and (max-width: 1200px) {
+            @content;
+        }
+    }
+}

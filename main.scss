@@ -22,6 +22,9 @@
 // Import Mixins
 @use './sass/helpers/mixins' as *;
 
+// Import Functions
+@use './sass/helpers/functions' as *;
+
 // Global Variable
 $alt_color: green;
 
@@ -324,4 +327,150 @@ ul.links {
     @include circle(400px);
     @include centering;
 
+}
+
+// Loop => for   IMPORTANT TO LEARN IN SASS
+// there are two ways in for loop through word and to word => through word(it will get 10 number include number 10)|to word(it will get till 9 number 10 not include)
+
+@for $i from 1 through 10 {
+    .class-#{$i} {
+        font-size: #{$i + 10px};
+    }
+}
+
+
+$dimensions: 0;
+
+@for $i from 1 through 10 {
+    .circle-#{100 + $dimensions} {
+        width: $dimensions + 100px;
+        height: $dimensions + 100px;
+        border-radius: 50%;
+    }
+    $dimensions: $dimensions + 100;
+}
+
+
+
+// Loop => Each and Maps IMPORTANT TO LEARN IN SASS
+
+
+$themes: red, green, blue, orange;
+
+@each $theme in $themes {
+    .#{$theme}-theme {
+        .product {
+            background-color: white;
+            border-bottom:2px solid #{$theme};
+            .title {
+                color: $theme;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// key:value using maps
+
+$socials: (
+    'facebook': blue, 
+    'youtube': red, 
+    'github': black,
+    'twitter': green,
+    );
+
+@each $name, $color in $socials {
+    .#{$name} {
+        background-color: $color;
+        color: white;
+        &::before {
+            content: $name;
+        }
+    }
+}
+
+$classes: 'one' 20px red, 'two' 15px green, 'three' 22px blue;
+
+@each $class, $font, $color in $classes {
+    .#{$class} {
+        font-size: $font;
+        background-color: $color;
+        color: white;
+        padding: $font / 2;
+    }
+}
+
+// Loop => While
+
+$start: 1;
+
+@while $start <= 10 {
+    .width-#{$start * 100} {
+        width: ($start * 100px) / 2;
+    }
+    $start: $start + 1;
+}
+
+// Create Grid System  using the grid system in bootstrap with 12 coloumn examples!!!! col-6 col-12
+
+$gird_cols: 12;
+
+@for $i from 1 through $gird_cols {
+    .col-#{$i} {
+        width: percentage($i / $gird_cols);
+    }
+}
+
+
+
+
+// Function please check the file inside helpers dir called _functions.scss
+
+$width: 200px;
+
+.element {
+    width: $width;
+    height: half($width);
+    top: calculate(100px, 200px, 50px)
+}
+
+// Practice Mixin with content important to check the files _mixins.scss to understand the example and how to work with content
+
+.black-overlay {
+    @include overlay(black, 0.5);
+}
+
+@include keyF(fade-in) {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@include keyF(go-up) {
+    from {
+        bottom: 0;
+    }
+
+    to {
+        bottom: 100px;
+    }
+}
+
+// If condition + Mixin + Content  => please check the file _minins.scss to understand the example
+
+.media {
+    @include breakpoints(mobile) {
+        font-size: 15px;
+    }
+    @include breakpoints(small) {
+        font-size: 18px;
+    }
+    @include breakpoints(medium) {
+        font-size: 20px;
+    }
+    @include breakpoints(large) {
+        font-size: 25px;
+    }
 }
